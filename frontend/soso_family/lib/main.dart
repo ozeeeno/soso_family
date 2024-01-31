@@ -33,7 +33,7 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
-  int _currentIndex = 0; // 현재 선택된 탭 인덱스
+  int _currentIndex = 1; // 현재 선택된 탭 인덱스
 
   final _pages = [
     const CalendarPage(),
@@ -76,11 +76,11 @@ class _StartPageState extends State<StartPage> {
             label: '오늘의질문',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.event),
+            icon: Icon(Icons.leaderboard),
             label: '랭킹보드',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.select_all),
+            icon: Icon(Icons.receipt_long),
             label: '리포트',
           ),
         ],

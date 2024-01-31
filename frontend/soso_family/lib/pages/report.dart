@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 
 class ReportPage extends StatefulWidget {
@@ -29,28 +31,28 @@ class _ReportPageState extends State<ReportPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('이 달의 리포트'),
+        title: const Text('이 달의 리포트'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Align(
               alignment: Alignment.center,
               child: Text(_month,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 30,
                   )),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               "AI가 우리 가족에 대해 정리해줬어요.",
               style: TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             AIFamilyMemberAnswer('아빠', _dadAIreport),
             AIFamilyMemberAnswer('엄마', _momAIreport),
             AIFamilyMemberAnswer('딸', _daughterAIreport),
@@ -67,14 +69,14 @@ class _ReportPageState extends State<ReportPage> {
       children: [
         Text(
           member,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(
           answer,
-          style: TextStyle(fontSize: 14),
+          style: const TextStyle(fontSize: 14),
         ),
-        SizedBox(height: 30),
+        const SizedBox(height: 30),
       ],
     );
   }

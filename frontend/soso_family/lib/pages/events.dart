@@ -14,6 +14,7 @@ class CalendarPage extends StatefulWidget {
 class _CalendarPageState extends State<CalendarPage> {
   late final ValueNotifier<List<Event>> _selectedEvents;
   final CalendarFormat _calendarFormat = CalendarFormat.month;
+
   RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
       .toggledOff; // Can be toggled on/off by longpressing a date
   DateTime _focusedDay = DateTime.now();
@@ -41,7 +42,6 @@ class _CalendarPageState extends State<CalendarPage> {
   }
 
   List<Event> _getEventsForRange(DateTime start, DateTime end) {
-    // Implementation example
     final days = daysInRange(start, end);
 
     return [
@@ -54,7 +54,7 @@ class _CalendarPageState extends State<CalendarPage> {
       setState(() {
         _selectedDay = selectedDay;
         _focusedDay = focusedDay;
-        _rangeStart = null; // Important to clean those
+        _rangeStart = null;
         _rangeEnd = null;
         _rangeSelectionMode = RangeSelectionMode.toggledOff;
       });
@@ -72,7 +72,6 @@ class _CalendarPageState extends State<CalendarPage> {
       _rangeSelectionMode = RangeSelectionMode.toggledOn;
     });
 
-    // `start` or `end` could be null
     if (start != null && end != null) {
       _selectedEvents.value = _getEventsForRange(start, end);
     } else if (start != null) {
@@ -94,10 +93,10 @@ class _CalendarPageState extends State<CalendarPage> {
             firstDay: kFirstDay,
             lastDay: kLastDay,
             focusedDay: _focusedDay,
+            calendarFormat: _calendarFormat,
             selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
             rangeStartDay: _rangeStart,
             rangeEndDay: _rangeEnd,
-            calendarFormat: _calendarFormat,
             rangeSelectionMode: _rangeSelectionMode,
             eventLoader: _getEventsForDay,
             startingDayOfWeek: StartingDayOfWeek.monday,
@@ -106,6 +105,14 @@ class _CalendarPageState extends State<CalendarPage> {
             onPageChanged: (focusedDay) {
               _focusedDay = focusedDay;
             },
+            calendarBuilders: CalendarBuilders<Event>(
+              markerBuilder: (context, date, events) {
+                if (events.isNotEmpty) {
+                  return _buildEventsMarker(date, events);
+                }
+                return null;
+              },
+            ),
           ),
           const SizedBox(height: 8.0),
           Expanded(
@@ -138,5 +145,40 @@ class _CalendarPageState extends State<CalendarPage> {
         ],
       ),
     );
+  }
+}
+
+Widget _buildEventsMarker(DateTime date, List<Event> events) {
+  return Positioned(
+    right: 1,
+    bottom: 1,
+    child: AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: _getColorByEventCount(events.length),
+      ),
+      width: 16.0,
+      height: 16.0,
+      child: Center(
+        child: Text(
+          '${events.length}',
+          style: const TextStyle().copyWith(
+            color: Colors.white,
+            fontSize: 12.0,
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+Color _getColorByEventCount(int count) {
+  if (count < 2) {
+    return Colors.red;
+  } else if (count < 3) {
+    return Colors.orange;
+  } else {
+    return Colors.green;
   }
 }

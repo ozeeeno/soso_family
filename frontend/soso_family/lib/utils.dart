@@ -18,16 +18,25 @@ class Event {
 final kEvents = LinkedHashMap<DateTime, List<Event>>(
   equals: isSameDay,
   hashCode: getHashCode,
-)..addAll(_kEventSource);
-
-final _kEventSource = {
-  for (var item in List.generate(50, (index) => index))
-    DateTime.utc(kFirstDay.year, kFirstDay.month, item * 5): List.generate(
-        item % 4 + 1, (index) => Event('Event $item | ${index + 1}'))
-}..addAll({
+)..addAll({
     kToday: [
       const Event('Today\'s Event 1'),
       const Event('Today\'s Event 2'),
+    ],
+    // 3일 후에 대한 이벤트
+    kToday.add(const Duration(days: 3)): [
+      const Event('이벤트 A'),
+    ],
+    // 5일 후에 대한 이벤트
+    kToday.add(const Duration(days: 5)): [
+      const Event('이벤트 B'),
+      const Event('이벤트 C'),
+    ],
+    // 7일 후에 대한 이벤트
+    kToday.add(const Duration(days: 7)): [
+      const Event('이벤트 D'),
+      const Event('이벤트 E'),
+      const Event('이벤트 F'),
     ],
   });
 
