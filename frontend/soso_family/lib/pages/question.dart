@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -14,7 +16,7 @@ class _QuestionPageState extends State<QuestionPage> {
   late String _momAnswer;
   late String _daughterAnswer;
   late String _sonAnswer;
-  TextEditingController _commentController = TextEditingController();
+  final TextEditingController _commentController = TextEditingController();
   int _dadLikes = 0;
   int _momLikes = 0;
   int _daughterLikes = 0;
@@ -41,7 +43,7 @@ class _QuestionPageState extends State<QuestionPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('오늘의 질문'),
+        title: const Text('오늘의 질문'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -49,37 +51,38 @@ class _QuestionPageState extends State<QuestionPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 ('35번째 질문 $formattedDate'),
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 _question, // Display the question with the formatted date
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               buildFamilyMemberAnswer('아빠', _dadAnswer, _dadLikes, _dadLiked),
               buildFamilyMemberAnswer('엄마', _momAnswer, _momLikes, _momLiked),
               buildFamilyMemberAnswer(
                   '딸', _daughterAnswer, _daughterLikes, _daughterLiked),
               buildFamilyMemberAnswer('아들', _sonAnswer, _sonLikes, _sonLiked),
-              SizedBox(height: 35),
-              Text(
+              const SizedBox(height: 35),
+              const Text(
                 '아들 (나)',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               TextField(
                 controller: _commentController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: '답변을 작성하세요...',
                   border: OutlineInputBorder(),
                 ),
                 maxLines: 2,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
                   setState(() {
@@ -88,7 +91,7 @@ class _QuestionPageState extends State<QuestionPage> {
                   });
                   print('댓글: $_sonAnswer');
                 },
-                child: Text('답변 작성'),
+                child: const Text('답변 작성'),
               ),
             ],
           ),
@@ -107,7 +110,7 @@ class _QuestionPageState extends State<QuestionPage> {
           children: [
             Text(
               member,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             Row(
               children: [
@@ -139,14 +142,14 @@ class _QuestionPageState extends State<QuestionPage> {
             ),
           ],
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Text(
           answer,
           style: answer == "아직 답변하지 않았어요.."
-              ? TextStyle(fontSize: 14, color: Colors.grey)
-              : TextStyle(fontSize: 14),
+              ? const TextStyle(fontSize: 14, color: Colors.grey)
+              : const TextStyle(fontSize: 14),
         ),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
       ],
     );
   }
