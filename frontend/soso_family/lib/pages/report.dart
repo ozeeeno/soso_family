@@ -20,6 +20,8 @@ class _ReportPageState extends State<ReportPage> {
   bool _isButtonVisible = true;
   bool _isActivityButtonVisible = false;
 
+  late String _recommendation = "";
+
   @override
   void initState() {
     super.initState();
@@ -59,11 +61,23 @@ class _ReportPageState extends State<ReportPage> {
     // await Future.delayed(const Duration(seconds: 2)); // Simulating a delay
   }
 
-  void recommendActivities() {
-    setState(() {
-      _isActivityButtonVisible = true; // 버튼 숨기기
-      // TODO: 실제 활동 추천 로직 구현
-    });
+  Future<void> recommendActivities() async {
+    final response =
+        await http.get(Uri.parse('http://127.0.0.1:5000/recommend'));
+
+    if (response.statusCode == 200) {
+      setState(() {
+        _recommendation = utf8.decode(response.bodyBytes);
+        // 기존 AI 리포트 내용을 지우고, 추천 내용만 표시
+        _dadAIreport = "";
+        _momAIreport = "";
+        _daughterAIreport = "";
+        _sonAIreport = "";
+        _isActivityButtonVisible = false; // 추천 버튼 숨기기
+      });
+    } else {
+      throw Exception('Failed to load recommendation');
+    }
   }
 
   @override
@@ -128,6 +142,11 @@ class _ReportPageState extends State<ReportPage> {
                       style: TextStyle(fontSize: 18),
                     ),
                   ),
+                ),
+              if (_recommendation.isNotEmpty)
+                Text(
+                  _recommendation,
+                  style: const TextStyle(fontSize: 16),
                 ),
             ],
           ),
