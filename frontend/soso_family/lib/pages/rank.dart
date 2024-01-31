@@ -35,7 +35,7 @@ class _RankPageState extends State<RankPage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
               child: Text(_month,
