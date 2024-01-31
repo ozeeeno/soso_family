@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'SoSo Family',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: const StartPage(),
     );
@@ -60,7 +60,7 @@ class _StartPageState extends State<StartPage> {
           });
         },
         // BottomNavigationBar 배경색 설정
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         // 선택된 탭의 아이템 색상
         selectedItemColor: Colors.white,
         // 선택되지 않은 탭의 아이템 색상
