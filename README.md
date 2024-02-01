@@ -57,3 +57,21 @@
 - API: OpenAI
 
 
+## How to run?
+
+#### Backend
+
+      cd ~/backend/
+
+      flask run 
+
+#### Frontend
+
+      cd ~/frontend/soso_family/
+
+      Simulator 키기
+
+      main.dart에서 Run 누르기
+      
+
+
