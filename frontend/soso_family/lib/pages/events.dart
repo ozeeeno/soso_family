@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -37,21 +38,25 @@ class _CalendarPageState extends State<CalendarPage> {
   Future<void> _fetchEvents() async {
     final response =
         await http.get(Uri.parse('http://127.0.0.1:5000/calendar'));
-
+    print("hello");
+    print(utf8.decode(response.bodyBytes));
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(utf8.decode(response.bodyBytes));
+      print(data);
       setState(() {
         _events = data.map((key, value) => MapEntry(DateTime.parse(key),
             List.generate(value, (index) => Event('Event $index'))));
       });
+      print(_events);
     } else {
       throw Exception('Failed to load events');
     }
   }
 
   Future<void> _fetchEventDetails(DateTime date) async {
-    final response =
-        await http.get(Uri.parse('http://127.0.0.1:5000/calendar_detail'));
+    final dateStr = DateFormat('yyyyMMdd').format(date);
+    final response = await http
+        .get(Uri.parse('http://127.0.0.1:5000/calendar_detail?date=$dateStr'));
 
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(utf8.decode(response.bodyBytes));
