@@ -51,5 +51,9 @@
 ## 아키텍처 구조
 <img width="855" alt="스크린샷 2024-02-01 14 04 27" src="https://github.com/noweymik/soso_family/assets/72730302/e1b7eec3-e421-461d-a9b0-bfa02636a3cf">
 
+- Frontend: Flutter
+- Backend: Flask
+- Database: AWS RDS
+- API: OpenAI
 
 
