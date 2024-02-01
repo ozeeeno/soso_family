@@ -15,7 +15,7 @@ class _RankPageState extends State<RankPage> {
   @override
   void initState() {
     super.initState();
-    _month = "2023년 12월";
+    _month = "2024년 1월";
 
     familyMembers = [
       FamilyMember(name: '아빠', hearts: 5),
